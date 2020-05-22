@@ -13,14 +13,13 @@ public class DemoController {
     }
 
     @PostMapping("/calcul")
-    @ResponseBody
-    public String calculate(@RequestBody Calcul calcul) throws ScriptException
+    public Integer calculate(@RequestBody Calcul calcul) throws ScriptException
     {
         ScriptEngineManager mgr = new ScriptEngineManager();
         ScriptEngine engine = mgr.getEngineByName("JavaScript");
-        String foo = "42+3";
-        System.out.println(engine.eval(foo));
-        return calcul.expression;
+        System.out.println(engine.eval(calcul.expression));
+        Integer result = (Integer) engine.eval(calcul.expression);
+        return result;
 
     }
 }
